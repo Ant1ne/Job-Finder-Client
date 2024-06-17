@@ -3,6 +3,7 @@ import Banner from "../components/Banner";
 import Card from "../components/Card";
 import Jobs from "./Jobs";
 import Sidebar from "../sidebar/Sidebar";
+import Newsletter from "../components/Newsletter";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -83,7 +84,8 @@ const Home = () => {
         }) =>
           jobLocation.toLowerCase() === selected.toLowerCase() ||
           parseInt(maxSalary) <= parseInt(selected) ||
-          experienceLevel === selected ||
+          postingDate >= selected ||
+          experienceLevel.toLowerCase() === selected.toLowerCase() ||
           salaryType.toLowerCase() === selected.toLowerCase() ||
           employmentType.toLowerCase() === selected.toLowerCase()
       );
@@ -126,7 +128,7 @@ const Home = () => {
               <button
                 onClick={prevPage}
                 disabled={currentPage === 1}
-                className="hover:underline"
+                className="py-2 px-5 border rounded bg-blue text-white"
               >
                 Previous
               </button>
@@ -139,7 +141,7 @@ const Home = () => {
                 disabled={
                   currentPage === Math.ceil(filteredItems.length / itemsPerPage)
                 }
-                className="hover:underline"
+                className="py-2 px-5 border rounded bg-blue text-white"
               >
                 Next
               </button>
@@ -149,7 +151,9 @@ const Home = () => {
           )}
         </div>
         {/* right side */}
-        <div className="bg-white p-4 rounded">Right</div>
+        <div className="bg-white p-4 rounded">
+          <Newsletter />
+        </div>
       </div>
     </div>
   );
